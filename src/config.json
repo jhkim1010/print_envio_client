@@ -1,0 +1,13 @@
+{
+    "company": {
+      "name": "inquieta",
+      "address": "Helguera 493 - (1406) - C.A.B.A.",
+      "phone": "4611-0474"
+    }, 
+    "printer" : {
+      "name": "Epson TM-T20II",
+      "address": "USB",
+      "driver": "EPSON TM-T20II Receipt"
+    }
+  }
+  

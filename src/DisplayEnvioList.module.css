@@ -1,0 +1,29 @@
+.div_main{
+    padding: 5px;
+}
+.table_container {
+  width: '80mm';
+  height: '100mm';
+  overflow: clip;
+  border: 2px solid black;
+}
+
+.table_row {
+    height: '8mm';
+}
+
+@media print {
+    @page {
+      size: A6;
+      margin: 0;
+    }
+  
+    body {
+      margin: 0;
+    }
+  
+    div {
+      width: 105mm;
+      height: 148mm;
+    }
+  }

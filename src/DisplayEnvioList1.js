@@ -71,8 +71,10 @@ function DisplayEnvioList({ datas }) {
     // 날짜 추가
     doc.setFont("ArialBlack");
     doc.setFontSize(20);
-    const date = new Date().toLocaleDateString();
-    doc.text(`${date}`, 100, 25 + yOffset);
+    const date = new Date().getDate();
+    const month = new Date().getMonth()+1;
+    const year = new Date().getFullYear();
+    doc.text(`${date}.${month}.${year}`, 100, 25 + yOffset);
 
     // 사각형 추가
     doc.rect(30, 40 + yOffset, 110, 10); // nombre
@@ -100,6 +102,7 @@ function DisplayEnvioList({ datas }) {
     doc.text(cliente_data.nombre_cliente,            52, 47 + yOffset); // 사각형 내부에 텍스트 추가
     doc.text(cliente_data.cliente.localidad_transp,  52, 69 + yOffset); // 사각형 내부에 텍스트 추가
     doc.text(cliente_data.cliente.prov_transp,       52, 80 + yOffset); // 사각형 내부에 텍스트 추가
+    doc.text(cliente_data.cliente.codigo_postal,    122, 80 + yOffset); // 사각형 내부에 텍스트 추가
     doc.text(cliente_data.cliente.transporte,        52, 91 + yOffset); // 사각형 내부에 텍스트 추가
     doc.text(cliente_data.cant.toString(),          122, 91 + yOffset); // 사각형 내부에 텍스트 추가
 

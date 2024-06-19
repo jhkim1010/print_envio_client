@@ -13,9 +13,9 @@ function App() {
   // const [messageReceived, setMessageReceived] = useState("");
   // const [room, setRoom] = useState("");
 
-  const readDatas = () => {
+  useEffect(() => {
     socket.emit("get_data", "envio_imp")  
-  }
+  }, []); 
 
   useEffect(() => {
     socket.on("receive_data", (datas1) => {
@@ -27,7 +27,7 @@ function App() {
 
   return (
     <div className="App">
-      <button onClick={readDatas}>Get List to print</button>
+      {/* <button onClick={readDatas}>Get List to print</button> */}
       <h1>List of Envio</h1>
       <DisplayEnvioList datas = {datas}/>
       <br />

@@ -1,5 +1,5 @@
 // import React from "react";
-import React, { useState } from "react";
+// import React, { useState } from "react";
 import io from "socket.io-client";
 import image_logo from "./logo_remito.png";
 import image_envio from "./envio.png";
@@ -8,7 +8,6 @@ import jsPDF from "jspdf";
 const socket = io.connect("http://localhost:3001");
 const {
   Button,
-  // Box,
   Table,
   TableBody,
   TableCell,
@@ -16,11 +15,13 @@ const {
   TableHead,
   TableRow,
   Paper,
-  // Typography,
 } = require("@mui/material");
 
 function DisplayEnvioList({ datas }) {
   // const [selectedData, setSelectedData] = useState(null);
+  console.log("Dentro de DisplayEnvioList");
+  console.log(typeof datas);
+  console.log( datas);
 
   // Arial Black 폰트의 base64 인코딩된 문자열 (일부 생략됨)
   const arialBlackBase64 = "data:font/ttf;base64,..."; // 여기에 base64 데이터를 추가하세요.
@@ -45,7 +46,7 @@ function DisplayEnvioList({ datas }) {
       // 3번 이상 찍게 될 때 새 페이지를 추가... 
       if (i !== 0 && i % 2 === 0) doc.addPage();
       console.log(i);
-      addPageContent(doc, data1, (i % 2) * 100);
+      addPageContent(doc, data1, i+1, (i % 2) * 100);
     });
     // // 두 번째 내용 추가
     // addPageContent(doc, 100); // yOffset을 이용해 아래에 배치
@@ -60,7 +61,7 @@ function DisplayEnvioList({ datas }) {
   };
 
   // 페이지에 내용 추가 함수
-  const addPageContent = (doc, cliente_data, yOffset = 0) => {
+  const addPageContent = (doc, cliente_data, current_index, yOffset = 0) => {
     // 로고 추가
     console.log(`Dentro de AddPageContent`); 
     console.log(cliente_data);
@@ -104,7 +105,7 @@ function DisplayEnvioList({ datas }) {
     doc.text(cliente_data.cliente.prov_transp,       52, 80 + yOffset); // 사각형 내부에 텍스트 추가
     doc.text(cliente_data.cliente.codigo_postal,    122, 80 + yOffset); // 사각형 내부에 텍스트 추가
     doc.text(cliente_data.cliente.transporte,        52, 91 + yOffset); // 사각형 내부에 텍스트 추가
-    doc.text(cliente_data.cant.toString(),          122, 91 + yOffset); // 사각형 내부에 텍스트 추가
+    doc.text(`${current_index}/${cliente_data.cant.toString()}`,          122, 91 + yOffset); // 사각형 내부에 텍스트 추가
 
     const direccion_length_limit = 40; 
     if(cliente_data.cliente.direccion_transp.length > direccion_length_limit){ 
@@ -134,6 +135,8 @@ function DisplayEnvioList({ datas }) {
               {/* <TableCell>Check</TableCell> */}
               <TableCell>ID</TableCell>
               <TableCell>Name</TableCell>
+              <TableCell>Provincia</TableCell>
+              <TableCell>Transporte</TableCell>
               <TableCell>Cant</TableCell>
               <TableCell>Orden</TableCell>
             </TableRow>
@@ -144,6 +147,8 @@ function DisplayEnvioList({ datas }) {
                   <TableRow key={data.id_envio_imp}>
                     <TableCell>{data.id_envio_imp}</TableCell>
                     <TableCell>{data.nombre_cliente}</TableCell>
+                    <TableCell>{data.cliente.prov_transp}</TableCell>
+                    <TableCell>{data.cliente.transporte}</TableCell>
                     <TableCell>{data.cant}</TableCell>
                     <TableCell>
                       <Button

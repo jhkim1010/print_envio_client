@@ -14,6 +14,7 @@
     "html2canvas": "^1.4.1",
     "jspdf": "^2.5.1",
     "jspdf-autotable": "^3.8.2",
+    "material-table": "^1.69.3",
     "next": "^14.2.3",
     "or": "^0.2.0",
     "puppeteer": "^22.10.0",
@@ -50,6 +51,7 @@
     ]
   },
   "devDependencies": {
-    "electron": "^31.0.1"
+    "electron": "^31.0.1",
+    "terser-brunch": "^4.1.0"
   }
 }

@@ -75,6 +75,7 @@ function DisplayEnvioList({ datas }) {
     const date = new Date().getDate();
     const month = new Date().getMonth()+1;
     const year = new Date().getFullYear();
+    // console.log(`${date}.${month}.${year}`);
     doc.text(`${date}.${month}.${year}`, 100, 25 + yOffset);
 
     // 사각형 추가
@@ -107,7 +108,7 @@ function DisplayEnvioList({ datas }) {
     doc.text(cliente_data.cliente.transporte,        52, 91 + yOffset); // 사각형 내부에 텍스트 추가
     doc.text(`${current_index}/${cliente_data.cant.toString()}`,          122, 91 + yOffset); // 사각형 내부에 텍스트 추가
 
-    const direccion_length_limit = 40; 
+    const direccion_length_limit = 30; 
     if(cliente_data.cliente.direccion_transp.length > direccion_length_limit){ 
       doc.setFontSize(10);
       const direc1 = cliente_data.cliente.direccion_transp.substring(0, direccion_length_limit);

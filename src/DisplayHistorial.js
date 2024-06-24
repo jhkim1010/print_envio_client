@@ -15,15 +15,15 @@ function DisplayHistorial({ datas }) {
 
   const historial = []; 
 
-  // datas.forEach(element => {
-  //   historial.push({
-  //     fecha: element.date,
-  //     nombre: element.nombre_cliente,
-  //     prov: element.cliente.prov_transp,
-  //     localidad: element.cliente.localidad_transp, 
-  //     transporte: element.cliente.transporte,
-  //     bulto: element.cant,  
-  // })} );
+  datas? (datas.forEach(element => {
+    historial.push({
+      fecha: element.date,
+      nombre: element.nombre_cliente,
+      prov: element.cliente.prov_transp,
+      localidad: element.cliente.localidad_transp, 
+      transporte: element.cliente.transporte,
+      bulto: element.cant,  
+  })} )): console.log("No hay datos");
 
   const columns = [
     { title: "Fecha", field: "fecha", align: "center", defaultSort: "asc" },

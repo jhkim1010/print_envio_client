@@ -67,6 +67,7 @@ function DisplayEnvioList({ datas }) {
     // console.log(`Dentro de AddPageContent`); 
     // console.log(cliente_data);
 
+    // cutter line
     if (current_index % 2 === 0) doc.text("-----------------------------------------------------------------------", 0, 4 + yOffset);
 
     doc.addImage(image_logo, "PNG", 30, 10 + yOffset, 70, 25);

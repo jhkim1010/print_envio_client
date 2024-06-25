@@ -47,6 +47,7 @@ function DisplayEnvioList({ datas }) {
       if (i !== 0 && i % 2 === 0) doc.addPage();
       console.log(i);
       addPageContent(doc, data1, i+1, (i % 2) * 100);
+
     });
     // // 두 번째 내용 추가
     // addPageContent(doc, 100); // yOffset을 이용해 아래에 배치
@@ -63,8 +64,10 @@ function DisplayEnvioList({ datas }) {
   // 페이지에 내용 추가 함수
   const addPageContent = (doc, cliente_data, current_index, yOffset = 0) => {
     // 로고 추가
-    console.log(`Dentro de AddPageContent`); 
-    console.log(cliente_data);
+    // console.log(`Dentro de AddPageContent`); 
+    // console.log(cliente_data);
+
+    if (current_index % 2 === 0) doc.text("-----------------------------------------------------------------------", 0, 4 + yOffset);
 
     doc.addImage(image_logo, "PNG", 30, 10 + yOffset, 70, 25);
     doc.addImage(image_envio, "PNG", 10, 35 + yOffset, 15, 60);
@@ -76,12 +79,12 @@ function DisplayEnvioList({ datas }) {
     const month = new Date().getMonth()+1;
     const year = new Date().getFullYear();
     // console.log(`${date}.${month}.${year}`);
-    doc.text(`${date}.${month}.${year}`, 100, 25 + yOffset);
+    doc.text(`${String(date).padStart(2, "0")}.${String(month).padStart(2, "0")}.${year}`, 100, 25 + yOffset);
 
     // 사각형 추가
     doc.rect(30, 40 + yOffset, 110, 10); // nombre
     doc.rect(30, 51 + yOffset, 110, 10); // direccion
-    doc.rect(30, 62 + yOffset, 110, 10); // localidad y prov
+    doc.rect(30, 62 + yOffset, 110, 10); // localidad y prov  
     doc.rect(30, 73 + yOffset, 110, 10); // transporte
     doc.rect(30, 84 + yOffset, 110, 10); // Bulto
 

@@ -16,9 +16,13 @@ function App() {
   // const [messageReceived, setMessageReceived] = useState("");
   // const [room, setRoom] = useState("");
 
-  function readDatas() {
+  useEffect(() => {
     socket.emit("get_data", "envio_imp");
-  };
+  }, []);
+
+  // function readDatas() {
+  //   socket.emit("get_data", "envio_imp");
+  // };
 
   useEffect(() => {
     socket.on("receive_data", (datas1) => {
@@ -26,11 +30,11 @@ function App() {
       setDatas(datas1);
 
       const data_to_print = datas1.filter((data) => !data.is_deleted );
-      console.log(data_to_print);   
+      // console.log(data_to_print);   
       setDatas2Print(data_to_print);   
 
       const data_to_historial = datas1.filter((data) => data.is_deleted );
-      console.log(data_to_historial);   
+      // console.log(data_to_historial);   
       setDatas2Historial(data_to_historial);   
 
       // setSelectedData(true)
@@ -39,7 +43,7 @@ function App() {
 
   return (
     <div className="App">
-      <button onClick={readDatas}>Get List to print</button>
+      {/* <button onClick={readDatas}>Get List to print</button> */}
       <h1>List of Envio</h1>
       <DisplayEnvioList datas={datas2print} />
       <br />

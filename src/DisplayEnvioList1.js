@@ -68,7 +68,7 @@ function DisplayEnvioList({ datas }) {
     // console.log(cliente_data);
 
     // cutter line
-    if (current_index % 2 === 0) doc.text("-----------------------------------------------------------------------", 0, 4 + yOffset);
+    if (current_index % 2 === 0) doc.text("-----------------------------------------------------------------------------------", 0, 4 + yOffset);
 
     doc.addImage(image_logo, "PNG", 30, 10 + yOffset, 70, 25);
     doc.addImage(image_envio, "PNG", 10, 35 + yOffset, 15, 60);
@@ -102,7 +102,7 @@ function DisplayEnvioList({ datas }) {
     doc.text("Bulto      ", 112, 90 + yOffset); // 사각형 내부에 텍스트 추가
 
     // // "Hola" 텍스트 추가 (Arial Black 폰트 사용)
-    doc.setFont("ArialBlack");
+    // doc.setFont("ArialBlack");
     doc.setFontSize(14);
 
     doc.text(cliente_data.nombre_cliente,            52, 47 + yOffset); // 사각형 내부에 텍스트 추가

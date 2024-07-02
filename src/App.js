@@ -18,6 +18,10 @@ function App() {
 
   useEffect(() => {
     socket.emit("get_data", "envio_imp");
+//    socket.emit("get_configuration");
+    socket.on("configurations", (data) => {
+      console.log(data);
+    });
   }, []);
 
   // function readDatas() {
@@ -25,17 +29,18 @@ function App() {
   // };
 
   useEffect(() => {
+    
     socket.on("receive_data", (datas1) => {
-      console.log(datas1)
+      console.log(datas1);
       setDatas(datas1);
 
-      const data_to_print = datas1.filter((data) => !data.is_deleted );
-      // console.log(data_to_print);   
-      setDatas2Print(data_to_print);   
+      const data_to_print = datas1.filter((data) => !data.is_deleted);
+      // console.log(data_to_print);
+      setDatas2Print(data_to_print);
 
-      const data_to_historial = datas1.filter((data) => data.is_deleted );
-      // console.log(data_to_historial);   
-      setDatas2Historial(data_to_historial);   
+      const data_to_historial = datas1.filter((data) => data.is_deleted);
+      // console.log(data_to_historial);
+      setDatas2Historial(data_to_historial);
 
       // setSelectedData(true)
     });

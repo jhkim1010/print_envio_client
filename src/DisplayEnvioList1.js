@@ -4,6 +4,7 @@ import io from "socket.io-client";
 import image_logo from "./logo_remito.png";
 import image_envio from "./envio.png";
 import jsPDF from "jspdf";
+import React, {useContext} from "react";
 
 const socket = io.connect("http://localhost:3001");
 const {
@@ -17,11 +18,17 @@ const {
   Paper,
 } = require("@mui/material");
 
-function DisplayEnvioList({ datas }) {
+function DisplayEnvioList( {datas, is_print_date} ) {
   // const [selectedData, setSelectedData] = useState(null);
+  
   console.log("Dentro de DisplayEnvioList");
-  console.log(typeof datas);
-  console.log(datas);
+  // console.log(typeof datas );
+  // console.log(typeof datas.datas );
+  console.log(is_print_date );
+  
+  // const newArray = null;
+  
+  // console.log(newArray);
 
   // Arial Black 폰트의 base64 인코딩된 문자열 (일부 생략됨)
   const arialBlackBase64 = "data:font/ttf;base64,..."; // 여기에 base64 데이터를 추가하세요.
@@ -39,14 +46,14 @@ function DisplayEnvioList({ datas }) {
 
     // 이미지 로드
     //  const img = await loadImage(process.env.PUBLIC_URL + '/client/src/logo_remito.png');
-    console.log("Dentro de generatePDF");
-    console.log(data1);
+    // console.log("Dentro de generatePDF");
+    // console.log(data1);
 
     Array.from({ length: data1.cant }).forEach((_, i) => {
       // 3번 이상 찍게 될 때 새 페이지를 추가...
       if (i !== 0 && i % 2 === 0) doc.addPage();
-      console.log(i);
-      addPageContent(doc, data1, i + 1, (i % 2) * 100);
+      // console.log(i);
+      addPageContent(doc, data1, i + 1, (i % 2) * 100, is_print_date);
     });
     // // 두 번째 내용 추가
     // addPageContent(doc, 100); // yOffset을 이용해 아래에 배치
@@ -84,10 +91,11 @@ function DisplayEnvioList({ datas }) {
     return result;
   }
   // 페이지에 내용 추가 함수
-  const addPageContent = (doc, cliente_data, current_index, yOffset = 0) => {
+  const addPageContent = (doc, cliente_data, current_index, yOffset = 0, is_print_date) => {
     // 로고 추가
-    // console.log(`Dentro de AddPageContent`);
-    // console.log(cliente_data);
+    console.log(`Dentro de AddPageContent`);
+    console.log(is_print_date);
+    // const is_print_date = useContext(IsPrintDateContext);
 
     // cutter line
     if (current_index % 2 === 0)
@@ -107,6 +115,7 @@ function DisplayEnvioList({ datas }) {
     const month = new Date().getMonth() + 1;
     const year = new Date().getFullYear();
     // console.log(`${date}.${month}.${year}`);
+    if (is_print_date)
     doc.text(
       `${String(date).padStart(2, "0")}.${String(month).padStart(
         2,
@@ -178,7 +187,7 @@ function DisplayEnvioList({ datas }) {
   const deleteData = (id) => {
     console.log(id);
     const data = { id_envio_imp: id };
-    socket.emit("delete_data", data);
+    socket.emit("cancel_data", data);
   };
 
   return (
@@ -197,8 +206,8 @@ function DisplayEnvioList({ datas }) {
             </TableRow>
           </TableHead>
           <TableBody>
-            {datas
-              ? datas.map((data) => (
+            {datas  ?
+              datas.map((data) => (
                   <TableRow key={data.id_envio_imp}>
                     <TableCell>{data.id_envio_imp}</TableCell>
                     <TableCell>{data.nombre_cliente}</TableCell>

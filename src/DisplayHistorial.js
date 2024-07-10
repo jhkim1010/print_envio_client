@@ -7,9 +7,9 @@ import MaterialTable from "material-table";
 
 function DisplayHistorial({ datas }) {
   // const [selectedData, setSelectedData] = useState(null);
-  console.log("Dentro de DisplayHistorial");
-  console.log(typeof datas);
-  console.log(datas);
+  // console.log("Dentro de DisplayHistorial");
+  // console.log(typeof datas);
+  // console.log(datas);
   // const data_to_show = datas.filter((data) => data.is_deleted);
   // console.log(data_to_show);
 
